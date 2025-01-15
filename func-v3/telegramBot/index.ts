@@ -1,20 +1,27 @@
 import { AzureFunction, Context, HttpRequest } from '@azure/functions';
-import { webhookCallback } from 'grammy';
-import { BotService } from '../src/services/bot.service';
+import { Bot, webhookCallback } from 'grammy';
 
+/**
+ * Initialize the bot
+ */
 if (!process.env.BOT_TOKEN) {
   throw new Error("BOT_TOKEN is not defined")
 }
-const botService = new BotService({
-  botToken: process.env.BOT_TOKEN,
+const bot = new Bot(process.env.BOT_TOKEN);
+bot.command("whoiam", async (ctx) => {
+  await ctx.reply(`You're ${ctx.from?.first_name} (id: ${ctx.message?.from?.id}) from Azure Functions v3`);
 });
-botService.init();
 
+/**
+ * Setup Webhook Endpoint for the bot
+ * @param context 
+ * @param request 
+ */
 const telegramBot: AzureFunction = async function (
   context: Context,
   request: HttpRequest,
 ): Promise<void> {
-  await webhookCallback(botService.bot, "azure")(context as any, request);
+  await webhookCallback(bot, "azure")(context as any, request);
 };
 
 export default telegramBot;
