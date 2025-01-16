@@ -21,7 +21,7 @@ const telegramBot: AzureFunction = async function (
   context: Context,
   request: HttpRequest,
 ): Promise<void> {
-  await webhookCallback(bot, "azure")(context as any, request);
+  await webhookCallback(bot, "azure")(context, request);
 };
 
 export default telegramBot;

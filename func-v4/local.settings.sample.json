@@ -1,0 +1,9 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME": "node",
+    "AzureWebJobsFeatureFlags": "EnableWorkerIndexing",
+    "BOT_TOKEN": "<BOT_TOKEN>",
+    "AzureWebJobsStorage": "useDevelopmentStorage=true"
+  }
+}
