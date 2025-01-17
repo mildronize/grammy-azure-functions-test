@@ -15,5 +15,8 @@ bot.command("whoiam", async (ctx) => {
 app.http('telegramBot', {
     methods: ['GET', 'POST'],
     authLevel: 'anonymous',
-    handler: (request, context) => webhookCallback(bot, "azure-v4")(request, context)
+    handler: (request, context) =>{
+        const botCallback =  webhookCallback(bot, "azure-v4");
+        return botCallback(request);
+    }
 });
